@@ -1,0 +1,6 @@
+spring:
+  config:
+    activate:
+      on-profile: staging
+#logging:
+#  config: classpath:logback-dev.xml

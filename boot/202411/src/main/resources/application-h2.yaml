@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: h2
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always  # 항상 초기화 스크립트 실행
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true  # SQL 로그 확인
+

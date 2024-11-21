@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: wow
+#logging:
+#  config: classpath:logback-dev.xml
+logging:
+  config: classpath:logback-spring.xml

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <!--    	<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+    <springProperty name="applicationName" source="spring.application.name" defaultValue="boot"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%logger{36}|%method[%line]|%msg%n%ex{short}</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home:-log}/${applicationName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home:-log}/${applicationName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--            <maxHistory>30</maxHistory>-->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%logger{36}|%method[%line]|%msg%n%ex{short}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RRFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home:-log}/${applicationName}-rr.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home:-log}/${applicationName}-rr.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%logger{36}|%method[%line]|%msg%n%ex{short}</pattern>
+        </encoder>
+    </appender>
+    <appender name="API-RRFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home:-log}/${applicationName}-api-rr.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home:-log}/${applicationName}-api-rr.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%logger{36}|%method[%line]|%msg%n%ex{short}</pattern>
+        </encoder>
+    </appender>
+    <appender name="MACHINE-RRFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.home:-log}/${applicationName}-machine-rr.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.home:-log}/${applicationName}-machine-rr.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%thread|%logger{36}|%method[%line]|%msg%n%ex{short}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+
+<!--    <logger name="org.springframework" level="DEBUG"></logger>-->
+    <logger name="reactor.netty.http.client.HttpClient" level="DEBUG"/>
+    <logger name="com.ceragem.iot.wcore.filter.RequestLoggingFilter" level="INFO">
+        <appender-ref ref="RRFILE"/>
+    </logger>
+
+    <logger name="api" level="INFO" additivity="false">
+        <appender-ref ref="API-RRFILE"/>
+    </logger>
+
+    <logger name="machine" level="INFO" additivity="false">
+        <appender-ref ref="MACHINE-RRFILE"/>
+    </logger>
+
+    <logger name="com.zaxxer.hikari.pool.HikariPool" level="OFF"/>
+    <logger name="org.hibernate.loader.Loader" level="DEBUG"/>
+    <logger name="org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl" level="TRACE"/>
+    <logger name="com.ceragem.iot.wcore.resttemplate.interceptor.LoggingRequestInterceptor" level="DEBUG"/>
+    <logger name="org.hibernate.engine.internal.TwoPhaseLoad" level="OFF"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.engine.loading.internal.CollectionLoadContext" level="DEBUG"/>
+    <logger name="org.hibernate.metamodel.model.convert.internal.NamedEnumValueConverter" level="TRACE"/>
+    <logger name="io.lettuce.core.protocol" level="OFF"/>
+    <logger name="org.springframework.data.redis.core" level="OFF"/>
+    <logger name="org.springframework.session.data.redis" level="OFF"/>
+    <logger name="org.springframework.security.web.util.matcher" level="OFF"/>
+    <logger name="org.springframework.session.web" level="OFF"/>
+    <logger name="org.hibernate.hql" level="OFF"/>
+    <!--    <logger name="org.springframework" level="OFF"></logger>-->
+    <!--    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>-->
+    <!--    <logger name="org.springframework.web.reactive.function.client.ExchangeFunctions" level="TRACE"/>-->
+    <!--    <logger name="reactor.netty" level="TRACE"/>-->
+    <!--    <logger name="reactor.ipc.netty.http.server.HttpServer" level="DEBUG"/>-->
+    <!--    <logger name="logging.level.reactor.netty.http.client.HttpClient" level="TRACE"/>-->
+    <!--    <logger name="org.hibernate.metamodel.model.convert.internal.NamedEnumValueConverter" level="TRACE"/>-->
+    <!--    <logger name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener" level="OFF"/>-->
+</configuration>
+

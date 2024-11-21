@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo
+  profiles:
+    group:
+      local:
+        - common
+        - h2
+        - local
+      dev:
+        - common
+        - dev
+      staging:
+        - common
+        - staging
+      prod:
+        - common
+        - prod
